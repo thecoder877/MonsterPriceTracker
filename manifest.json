@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Monster Price Tracker",
+    "version": "1.0",
+    "description": "Prati cene Monster energetskih pića",
+    "icons": {
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+      }
+    },
+    "permissions": ["storage", "alarms", "notifications"],
+    "background": {
+      "service_worker": "background.js"
+    }
+  }
