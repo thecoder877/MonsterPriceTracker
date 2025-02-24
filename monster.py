@@ -8,6 +8,9 @@ from urllib.parse import unquote
 import shutil
 import os
 
+os.environ["PATH"] += ":/opt/render/project/.render/chrome/opt/google/chrome"
+
+
 def init_driver():
     """Inicijalizuje Chrome WebDriver sa ispravnim opcijama koristeći undetected-chromedriver"""
     chrome_options = uc.ChromeOptions()
