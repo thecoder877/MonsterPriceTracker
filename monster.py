@@ -1,4 +1,4 @@
-import undetected_chromedriver.v2 as uc  # Importujemo undetected-chromedriver
+import undetected_chromedriver as uc  # Importujemo undetected-chromedriver
 from selenium.webdriver.common.by import By
 import requests
 import xml.etree.ElementTree as ET
