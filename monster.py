@@ -20,10 +20,14 @@ def init_driver():
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--remote-debugging-port=9222")  # Neophodno za Render
 
+    # Set the binary location explicitly
+    chrome_options.binary_location = "/opt/render/project/.render/chrome/opt/google/chrome/chrome"
+
     # Koristimo undetected-chromedriver da izbegnemo detekciju
     driver = uc.Chrome(options=chrome_options)
 
     return driver
+
 
 def scrape_site(url):
     """Scrape-uje podatke sa prosleđenog URL-a"""
