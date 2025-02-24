@@ -8,7 +8,7 @@ from urllib.parse import unquote
 import shutil
 import os
 
-os.environ["PATH"] += ":/opt/render/project/.render/chrome/opt/google/chrome"
+os.environ["PATH"] += ":/usr/bin/google-chrome:/usr/bin/chrome"
 
 
 def init_driver():
@@ -21,7 +21,7 @@ def init_driver():
     chrome_options.add_argument("--remote-debugging-port=9222")  # Neophodno za Render
 
     # Set the binary location explicitly
-    chrome_options.binary_location = "/opt/render/project/.render/chrome/opt/google/chrome/google-chrome"
+    chrome_options.binary_location = "/usr/bin/google-chrome"
 
     # Koristimo undetected-chromedriver da izbegnemo detekciju
     driver = uc.Chrome(options=chrome_options)
