@@ -1,6 +1,13 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from monster import scrape_site, fetch_urls_from_sitemap  # Импортујте ваш скрепер
+from monster import scrape_site, fetch_urls_from_sitemap  
+import shutil
+
+def is_chrome_installed():
+    return shutil.which("google-chrome") is not None
+
+if not is_chrome_installed():
+    raise FileNotFoundError("Google Chrome nije instaliran. Proveri build skriptu.")
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
