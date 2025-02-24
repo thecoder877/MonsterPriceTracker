@@ -8,6 +8,23 @@ import time
 import pandas as pd
 from urllib.parse import unquote
 import shutil
+import os
+
+def is_chrome_installed():
+    return shutil.which("google-chrome") is not None
+def get_chrome_path():
+    possible_paths = ["/usr/bin/google-chrome", "/usr/local/bin/google-chrome", "/usr/bin/chrome"]
+    for path in possible_paths:
+        if os.path.exists(path):
+            return path
+    return None
+
+chrome_path = get_chrome_path()
+if chrome_path is None:
+    raise FileNotFoundError("Google Chrome nije instaliran ili nije na očekivanoj putanji.")
+
+print(f"✅ Google Chrome pronađen: {chrome_path}")
+
 
 def init_driver():
     chromedriver_autoinstaller.install()  # Automatska instalacija chromedrivera
