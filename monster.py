@@ -1,15 +1,12 @@
 from selenium.webdriver.common.by import By
 import requests
 import xml.etree.ElementTree as ET
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager  # Koristimo webdriver_manager
 import time
 import pandas as pd
 from urllib.parse import unquote
 import shutil
 import os
+import undetected_chromedriver.v2 as uc  # Importujemo undetected-chromedriver
 
 def is_chrome_installed():
     """Proverava da li je Google Chrome instaliran"""
@@ -30,8 +27,8 @@ if chrome_path is None:
 print(f"✅ Google Chrome pronađen: {chrome_path}")
 
 def init_driver():
-    """Inicijalizuje Chrome WebDriver sa ispravnim opcijama"""
-    chrome_options = Options()
+    """Inicijalizuje Chrome WebDriver sa ispravnim opcijama koristeći undetected-chromedriver"""
+    chrome_options = uc.ChromeOptions()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
@@ -40,9 +37,8 @@ def init_driver():
 
     chrome_options.binary_location = chrome_path  # Postavljamo putanju do Chrome-a
 
-    # Koristimo webdriver_manager da automatski preuzme ChromeDriver
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    # Koristimo undetected-chromedriver da izbegnemo detekciju
+    driver = uc.Chrome(options=chrome_options)
 
     return driver
 
@@ -60,8 +56,9 @@ def scrape_site(url):
     for product in products:
         try:
             name = product.find_element(By.CSS_SELECTOR, ".product_info.text-center.pt-2.pb-4 a").text
-        except:
+        except Exception as e:
             name = "N/A"
+            print(f"Error getting product name: {e}")
 
         price_elements = product.find_elements(By.CSS_SELECTOR, ".product_info_wrap .row")
         print(f"Found {len(price_elements)} price elements for product {name}")
@@ -72,7 +69,8 @@ def scrape_site(url):
                 store = price_element.find_element(By.TAG_NAME, "img").get_attribute("alt")
                 price = price_element.find_element(By.CLASS_NAME, "product_price").text
                 prices.append({"store": store, "price": price})
-            except:
+            except Exception as e:
+                print(f"Error extracting price info: {e}")
                 continue
 
         try:
