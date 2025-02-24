@@ -15,6 +15,7 @@ def init_driver():
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
+    options.binary_location = '/usr/bin/google-chrome'  # Specify the path to google-chrome
     driver = webdriver.Chrome(options=options)
     return driver
 
