@@ -21,7 +21,7 @@ def init_driver():
     chrome_options.add_argument("--remote-debugging-port=9222")  # Neophodno za Render
 
     # Set the binary location explicitly
-    chrome_options.binary_location = "/usr/bin/google-chrome"
+    chrome_options.binary_location = "/opt/render/project/.render/chrome/opt/google/chrome/google-chrome"
 
     # Koristimo undetected-chromedriver da izbegnemo detekciju
     driver = uc.Chrome(options=chrome_options)
