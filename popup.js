@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchPrices() {
   showLoading(true);
   try {
-    const response = await fetch('https://monsterpricetracker.onrender.com/api/prices'); // Replace with your Render URL
+    const response = await fetch('http://localhost:5000/api/prices'); // Replace with your API endpoint
     const data = await response.json();
     chrome.storage.local.set({ lastData: data, lastUpdate: new Date().toISOString() });
     renderData(data);
