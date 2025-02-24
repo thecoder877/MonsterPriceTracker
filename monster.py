@@ -7,15 +7,22 @@ import chromedriver_autoinstaller
 import time
 import pandas as pd
 from urllib.parse import unquote
+import shutil
 
 def init_driver():
-    chromedriver_autoinstaller.install()  # Automatically install chromedriver
+    chromedriver_autoinstaller.install()  # Automatska instalacija chromedrivera
+    
+    chrome_path = "/usr/bin/google-chrome"
+    if not shutil.which(chrome_path):
+        raise FileNotFoundError(f"Google Chrome nije pronađen na {chrome_path}")
+
     options = Options()
-    options.add_argument('--headless')  # Enable headless mode
+    options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    options.binary_location = '/usr/bin/google-chrome'  # Specify the path to google-chrome
+    options.binary_location = chrome_path  # Ispravan put do Chrome-a
+
     driver = webdriver.Chrome(options=options)
     return driver
 
@@ -47,7 +54,6 @@ def scrape_site(url):
             except:
                 continue
 
-        # Revised image URL extraction logic
         try:
             img_element = product.find_element(By.CSS_SELECTOR, "a.product_image img")
             srcset = img_element.get_attribute("srcset")
@@ -56,22 +62,17 @@ def scrape_site(url):
             img_url = "N/A"
             candidate_url = None
 
-            # Parse srcset to get the first URL
             if srcset:
                 entries = [entry.strip() for entry in srcset.split(',')]
                 if entries:
-                    first_entry = entries[0].split()[0]  # Get URL part before descriptor
+                    first_entry = entries[0].split()[0]
                     candidate_url = first_entry.strip()
 
-            # Fallback to src if no candidate from srcset
             if not candidate_url and src:
                 candidate_url = src.strip()
 
-            # Process candidate URL
             if candidate_url:
-                # Check if URL contains '/_next/image' and 'url=' parameter
                 if '/_next/image' in candidate_url and 'url=' in candidate_url:
-                    # Extract the encoded part
                     url_parts = candidate_url.split('url=')
                     if len(url_parts) > 1:
                         encoded_part = url_parts[1].split('&')[0]
@@ -79,16 +80,13 @@ def scrape_site(url):
                         img_url = decoded_url
                 else:
                     img_url = candidate_url
-            else:
-                img_url = "N/A"
 
-            print(f"Final image URL: {img_url}")  # Debug output
+            print(f"Final image URL: {img_url}")
 
         except Exception as e:
             print(f"Error extracting image: {e}")
             img_url = "N/A"
 
-        # Collect data
         if prices:
             for price in prices:
                 data.append({
@@ -106,18 +104,14 @@ def fetch_urls_from_sitemap(sitemap_path):
         with open(sitemap_path, 'r', encoding='utf-8') as file:
             sitemap_content = file.read()
 
-        # Clean up XML formatting issues if any
         sitemap_content = sitemap_content.strip()  
 
-        # Parse the XML content
         root = ET.fromstring(sitemap_content)
         
-        # Define the CORRECT namespace (match exactly what's in the XML)
         namespace = {
-            'default': 'https://www.sitemaps.org/schemas/sitemap/0.9'  # Note the https
+            'default': 'https://www.sitemaps.org/schemas/sitemap/0.9'
         }
         
-        # Extract URLs using the default namespace
         urls = [
             loc.text 
             for loc in root.findall(".//default:loc", namespace)
@@ -131,8 +125,7 @@ def fetch_urls_from_sitemap(sitemap_path):
         return []
 
 if __name__ == "__main__":
-    # Provide the local path to your sitemap.xml
-    sitemap_path = r'C:\Users\admin\Desktop\web_scraping_project\monster.xml'  # Local path to your sitemap file
+    sitemap_path = r'C:\Users\admin\Desktop\web_scraping_project\monster.xml'
     urls = fetch_urls_from_sitemap(sitemap_path)
     
     if not urls:
@@ -145,16 +138,7 @@ if __name__ == "__main__":
             if data:
                 all_data.extend(data)
 
-        rows = []
-        for item in all_data:
-            rows.append({
-                "name": item["name"],
-                "img_url": item["img_url"],
-                "store": item["store"],
-                "price": item["price"]
-            })
-
-        df = pd.DataFrame(rows)
+        df = pd.DataFrame(all_data)
         print(df.head())  
         df.to_csv("scraped_data.csv", index=False)
         print("Data saved to scraped_data.csv")
