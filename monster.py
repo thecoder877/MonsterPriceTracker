@@ -3,7 +3,8 @@ import requests
 import xml.etree.ElementTree as ET
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import chromedriver_autoinstaller
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager  # Koristimo webdriver_manager
 import time
 import pandas as pd
 from urllib.parse import unquote
@@ -11,8 +12,11 @@ import shutil
 import os
 
 def is_chrome_installed():
+    """Proverava da li je Google Chrome instaliran"""
     return shutil.which("google-chrome") is not None
+
 def get_chrome_path():
+    """Traži Google Chrome na poznatim putanjama"""
     possible_paths = ["/usr/bin/google-chrome", "/usr/local/bin/google-chrome", "/usr/bin/chrome"]
     for path in possible_paths:
         if os.path.exists(path):
@@ -25,25 +29,25 @@ if chrome_path is None:
 
 print(f"✅ Google Chrome pronađen: {chrome_path}")
 
-
 def init_driver():
-    chromedriver_autoinstaller.install()  # Automatska instalacija chromedrivera
-    
-    chrome_path = "/usr/bin/google-chrome"
-    if not shutil.which(chrome_path):
-        raise FileNotFoundError(f"Google Chrome nije pronađen na {chrome_path}")
+    """Inicijalizuje Chrome WebDriver sa ispravnim opcijama"""
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--remote-debugging-port=9222")  # Neophodno za Render
 
-    options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    options.binary_location = chrome_path  # Ispravan put do Chrome-a
+    chrome_options.binary_location = chrome_path  # Postavljamo putanju do Chrome-a
 
-    driver = webdriver.Chrome(options=options)
+    # Koristimo webdriver_manager da automatski preuzme ChromeDriver
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+
     return driver
 
 def scrape_site(url):
+    """Scrape-uje podatke sa prosleđenog URL-a"""
     driver = init_driver()
     driver.get(url)
     time.sleep(5)
@@ -117,6 +121,7 @@ def scrape_site(url):
     return data
 
 def fetch_urls_from_sitemap(sitemap_path):
+    """Parsira XML sitemap i vadi URL-ove"""
     try:
         with open(sitemap_path, 'r', encoding='utf-8') as file:
             sitemap_content = file.read()
