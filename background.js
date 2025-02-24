@@ -10,7 +10,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 async function fetchPrices() {
   try {
-    const response = await fetch('https://monsterpricetracker.onrender.com'); // Replace with your Render URL
+    const response = await fetch('https://monsterpricetracker.onrender.com/api/prices'); // Replace with your Render URL
     const data = await response.json();
     chrome.storage.local.set({ lastData: data, lastUpdate: new Date().toISOString() });
   } catch (error) {
