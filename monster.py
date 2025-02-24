@@ -1,3 +1,4 @@
+import undetected_chromedriver.v2 as uc  # Importujemo undetected-chromedriver
 from selenium.webdriver.common.by import By
 import requests
 import xml.etree.ElementTree as ET
@@ -6,25 +7,6 @@ import pandas as pd
 from urllib.parse import unquote
 import shutil
 import os
-import undetected_chromedriver.v2 as uc  # Importujemo undetected-chromedriver
-
-def is_chrome_installed():
-    """Proverava da li je Google Chrome instaliran"""
-    return shutil.which("google-chrome") is not None
-
-def get_chrome_path():
-    """Traži Google Chrome na poznatim putanjama"""
-    possible_paths = ["/usr/bin/google-chrome", "/usr/local/bin/google-chrome", "/usr/bin/chrome"]
-    for path in possible_paths:
-        if os.path.exists(path):
-            return path
-    return None
-
-chrome_path = get_chrome_path()
-if chrome_path is None:
-    raise FileNotFoundError("Google Chrome nije instaliran ili nije na očekivanoj putanji.")
-
-print(f"✅ Google Chrome pronađen: {chrome_path}")
 
 def init_driver():
     """Inicijalizuje Chrome WebDriver sa ispravnim opcijama koristeći undetected-chromedriver"""
@@ -34,8 +16,6 @@ def init_driver():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--remote-debugging-port=9222")  # Neophodno za Render
-
-    chrome_options.binary_location = chrome_path  # Postavljamo putanju do Chrome-a
 
     # Koristimo undetected-chromedriver da izbegnemo detekciju
     driver = uc.Chrome(options=chrome_options)
