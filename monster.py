@@ -3,17 +3,19 @@ import requests
 import xml.etree.ElementTree as ET
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
+import chromedriver_autoinstaller
 import time
 import pandas as pd
 from urllib.parse import unquote
 
 def init_driver():
+    chromedriver_autoinstaller.install()  # Automatically install chromedriver
     options = Options()
-    # options.add_argument('--headless')  # Uncomment if you want headless mode
+    options.add_argument('--headless')  # Enable headless mode
     options.add_argument('--disable-gpu')
-    service = Service(r'C:\Users\admin\Desktop\web_scraping_project\chromedriver-win64\chromedriver.exe')
-    driver = webdriver.Chrome(service=service, options=options)
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(options=options)
     return driver
 
 def scrape_site(url):

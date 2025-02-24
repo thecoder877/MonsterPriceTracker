@@ -5,3 +5,4 @@ pandas==1.4.2
 Werkzeug==2.1.2
 requests==2.26.0
 numpy==1.23.5
+chromedriver-autoinstaller==0.2.2
