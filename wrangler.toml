@@ -5,8 +5,8 @@ account_id = "951e9f0cad36ddaa4def09997d33d3bd"  # Replace with your Cloudflare 
 workers_dev = true
 
 main = "./worker.js"  # Replace with the path to your worker script
+compatibility_date = "2025-02-28"  
 
 [env.production]
 route = "https://monsterpricetrackerextension.crnapagoda.workers.dev/*"  # Replace with your domain
 zone_id = "your-zone-id"  # Replace with your Cloudflare zone ID
-compatibility_date = "2025-02-28"
