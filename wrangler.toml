@@ -4,11 +4,6 @@ type = "javascript"
 account_id = "your-cloudflare-account-id"  # Replace with your Cloudflare account ID
 workers_dev = true
 
-[build]
-command = "npm install && npm run build"
-
-[build.upload]
-format = "service-worker"
 main = "./worker.js"  # Replace with the path to your worker script
 
 [env.production]
