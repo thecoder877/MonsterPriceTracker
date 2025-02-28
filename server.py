@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from monster import scrape_site, fetch_urls_from_sitemap  # Import your scraper
+from monster import scrape_site, fetch_urls_from_sitemap  # Импортујте ваш скрепер
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -31,4 +31,4 @@ def get_prices():
     return jsonify(list(unique_data.values()))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(port=5000)
