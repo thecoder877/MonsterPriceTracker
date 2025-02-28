@@ -59,6 +59,43 @@ To run the Flask server locally, use the following command:
 python server.py
 ```
 
+## Deployment on Cloudflare
+
+### Cloudflare Pages
+
+1. Go to the Cloudflare dashboard and create a new Pages project.
+2. Connect your GitHub repository to Cloudflare Pages.
+3. Set the build command to:
+   ```sh
+   pip install -r requirements.txt && python server.py
+   ```
+4. Set the output directory to:
+   ```sh
+   .
+   ```
+
+### Cloudflare Workers
+
+1. Create a new Cloudflare Worker.
+2. Use the following script to proxy requests to your Flask API:
+
+```javascript
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+  const url = new URL(request.url)
+  url.hostname = 'your-flask-api-domain.com' // Replace with your Flask API domain
+  const newRequest = new Request(url, request)
+  return fetch(newRequest)
+}
+```
+
+3. Deploy the Worker and bind it to your domain.
+
+Now your Flask API should be accessible through Cloudflare.
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
