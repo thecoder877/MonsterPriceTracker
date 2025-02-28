@@ -4,7 +4,7 @@ addEventListener('fetch', event => {
 
 async function handleRequest(request) {
   const url = new URL(request.url)
-  url.hostname = 'monsterpricetrackerextension.pages.dev'  // Ensure the correct Cloudflare Pages URL
+  url.hostname = 'https://monsterpricetrackerextension.crnapagoda.workers.dev'  // Replace with your Flask server domain
   url.pathname = '/api/prices'  // Ensure the correct API path
   const newRequest = new Request(url, request)
   const response = await fetch(newRequest)
