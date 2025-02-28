@@ -86,7 +86,7 @@ addEventListener('fetch', event => {
 
 async function handleRequest(request) {
   const url = new URL(request.url)
-  url.hostname = 'your-flask-api-domain.com' // Replace with your Flask API domain
+  url.hostname = 'monster-prices-extension.pages.dev' // Updated to use Cloudflare Pages URL
   const newRequest = new Request(url, request)
   return fetch(newRequest)
 }

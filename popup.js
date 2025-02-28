@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchPrices() {
   showLoading(true);
   try {
-    const response = await fetch('https://monster-prices-extension.pages.dev/api/prices'); // Updated to use Cloudflare Pages URL
+    const response = await fetch('https://monsterpricetrackerextension.crnapagoda.workers.dev/api/prices'); // Updated to use Cloudflare Pages URL
     const data = await response.json();
     chrome.storage.local.set({ lastData: data, lastUpdate: new Date().toISOString() });
     renderData(data);
