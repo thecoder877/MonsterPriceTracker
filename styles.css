@@ -1,144 +1,326 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0;
-    padding: 0;
-    min-width: 300px;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px) saturate(180%);
-    border-radius: 12px;
-    margin: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-  }
-  
-  .header h1 {
-    margin: 0;
-    font-size: 1.5em;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .header button {
-    padding: 10px 20px;
-    border: none;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  
-  .header button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  #loading {
-    display: none;
-    text-align: center;
-    padding: 20px;
-    font-size: 1.2em;
-    color: rgba(255, 255, 255, 0.7);
-  }
-  
-  #content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px;
-    gap: 15px;
-  }
-  
-  .product {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px) saturate(180%);
-    border-radius: 16px;
-    margin: 10px;
-    padding: 20px;
-    width: 200px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  
-  .product:hover {
-    transform: translateY(-10px) scale(1.02);
-    background: rgba(0, 0, 0, 0.3);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  }
-  
-  .product img {
-    width: 100%;
-    border-radius: 12px;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 15px;
-  }
-  
-  .product h3 {
-    font-size: 1.1em;
-    margin: 10px 0;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .prices p {
-    margin: 8px 0;
-    padding: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 6px;
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.8);
-    border-left: 3px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .lowest-price {
-    font-weight: 600;
-    color: #00ff88 !important;
-    background: rgba(0, 255, 136, 0.1) !important;
-    padding: 10px !important;
-    border-radius: 8px !important;
-    margin-top: 15px !important;
-    border-left: 3px solid #00ff88 !important;
-  }
-  
-  .error {
-    color: #ff4444;
-    background: rgba(255, 68, 68, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 68, 68, 0.2);
-  }
+  font-family: 'Arial', sans-serif;
+  background: #000000;
+  color: rgba(230, 230, 230, 0.8);
+  background: #000 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10,10L90,10L90,90L10,90Z" fill="none" stroke="%2334b23b" stroke-width="0.3" opacity="0.05"/></svg>') fixed;
+  color: rgba(230,230,230,0.8);
+  margin: 0;
+  padding: 0;
+  min-width: 300px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10,10L90,10L90,90L10,90Z" fill="none" stroke="%2334b23b" stroke-width="0.3" opacity="0.05"/></svg>');
+  background-attachment: fixed;
+}
 
-  #settings {
-    margin: 20px;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px) saturate(180%);
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-  }
-  
-  .setting-item {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-  }
-  
-  .setting-item input {
-    margin-right: 10px;
-  }
+/* Monster Energy color variables */
+:root {
+  --monster-green: #1a9d20;
+  --monster-bright-green: #34b23b;
+  --monster-green-transparent: rgba(26, 157, 32, 0.2);
+  --monster-green-glow: 0 0 10px rgba(26, 157, 32, 0.5);
+  --monster-black: #000000;
+  --monster-green-transparent: rgba(26,157,32,0.2);
+  --monster-green-glow: 0 0 10px rgba(26,157,32,0.5);
+  --monster-black: #000;
+  --monster-dark-gray: #0a0a0a;
+  --monster-gray: #111111;
+  --monster-gray: #111;
+}
+
+/* Common glassmorphism styles with Monster theme */
+.header, .product, #settings, #loading, .error {
+  background: rgba(8, 8, 8, 0.85);
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 6px;
+  border: 1px solid rgba(26, 157, 32, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(26,157,32,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  margin: 10px;
+  border-top: 2px solid var(--monster-green);
+  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0,0,0,0.9);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5em;
+  color: var(--monster-bright-green);
+  text-shadow: 0 0 10px rgba(26, 157, 32, 0.7);
+  text-shadow: 0 0 10px rgba(26,157,32,0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 900;
+  animation: subtle-pulse 3s infinite ease-in-out;
+}
+
+.header button {
+  padding: 10px 20px;
+  border: none;
+  border: 1px solid rgba(26,157,32,0.2);
+  background: #0c0c0c;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--monster-bright-green);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid rgba(26, 157, 32, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.header button:hover {
+  background: #050505;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), var(--monster-green-glow);
+  border: 1px solid var(--monster-green);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.7), var(--monster-green-glow);
+  border-color: var(--monster-green);
+}
+
+#loading {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+  color: var(--monster-bright-green);
+  margin: 10px 20px;
+  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0,0,0,0.9);
+}
+
+#content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  gap: 15px;
+  background: transparent;
+}
+
+.product {
+  margin: 10px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  overflow: hidden;
+  background: rgba(5, 5, 5, 0.9);
+  background: rgba(5,5,5,0.9);
+}
+
+.product::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--monster-green);
+  box-shadow: var(--monster-green-glow);
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  background: rgba(8, 8, 8, 0.95);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8), 0 0 15px rgba(26, 157, 32, 0.2);
+  border: 1px solid rgba(26, 157, 32, 0.3);
+  background: rgba(8,8,8,0.95);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.8), 0 0 15px rgba(26,157,32,0.2);
+  border: 1px solid rgba(26,157,32,0.3);
+}
+
+.product img {
+  width: 100%;
+  border-radius: 4px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border: 1px solid rgba(26, 157, 32, 0.1);
+  border: 1px solid rgba(26,157,32,0.1);
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.product:hover img {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 0 8px rgba(26, 157, 32, 0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.8), 0 0 8px rgba(26,157,32,0.3);
+  filter: brightness(1) contrast(1.2);
+}
+
+.product h3 {
+  font-size: 1.1em;
+  margin: 10px 0;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 800;
+}
+
+.prices p {
+  margin: 8px 0;
+  padding: 10px;
+  background: rgba(10, 10, 10, 0.8);
+  background: rgba(10,10,10,0.8);
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: rgba(230, 230, 230, 0.7);
+  border-left: 2px solid rgba(26, 157, 32, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  color: rgba(230,230,230,0.7);
+  border-left: 2px solid rgba(26,157,32,0.3);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.lowest-price {
+  font-weight: 700 !important;
+  color: var(--monster-bright-green) !important;
+  background: rgba(10, 10, 10, 0.9) !important;
+  background: rgba(10,10,10,0.9) !important;
+  padding: 10px !important;
+  border-radius: 4px !important;
+  margin-top: 15px !important;
+  border-left: 2px solid var(--monster-green) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 5px rgba(26, 157, 32, 0.15) !important;
+  text-shadow: 0 0 5px rgba(26, 157, 32, 0.5) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 0 5px rgba(26,157,32,0.15) !important;
+  text-shadow: 0 0 5px rgba(26,157,32,0.5) !important;
+  animation: subtle-pulse 3s infinite ease-in-out;
+}
+
+.error {
+  color: #ff3333;
+  background: rgba(20, 5, 5, 0.9) !important;
+  color: #f33;
+  background: rgba(20,5,5,0.9) !important;
+  padding: 15px;
+  margin: 15px;
+  border: 1px solid rgba(255, 51, 51, 0.2) !important;
+  border-left: 3px solid #ff3333 !important;
+  border: 1px solid rgba(255,51,51,0.2) !important;
+  border-left: 3px solid #f33 !important;
+}
+
+#settings {
+  margin: 20px;
+  padding: 20px;
+  position: relative;
+  background: rgba(5, 5, 5, 0.9);
+  background: rgba(5,5,5,0.9);
+}
+
+#settings::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, transparent 50%, var(--monster-green) 50%);
+  border-radius:
+  0 0 0 3px;
+  border-radius: 0 0 0 3px;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  padding: 12px;
+  background: rgba(8, 8, 8, 0.8);
+  background: rgba(8,8,8,0.8);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+}
+
+.setting-item:hover {
+  background: rgba(12, 12, 12, 0.9);
+  background: rgba(12,12,12,0.9);
+  border-left: 2px solid var(--monster-green);
+}
+
+.setting-item input {
+  margin-right: 10px;
+  accent-color: var(--monster-green);
+}
+
+input, select, textarea {
+  background: rgba(8,8,8,0.9);
+  border: 1px solid rgba(26,157,32,0.2);
+  border-radius: 4px;
+  padding: 10px;
+  color: rgba(230,230,230,0.9);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--monster-green);
+  box-shadow: 0 0 0 1px rgba(26, 157, 32, 0.2);
+  background: rgba(10, 10, 10, 0.95);
+  box-shadow: 0 0 0 1px rgba(26,157,32,0.2);
+  background: rgba(10,10,10,0.95);
+}
+
+/* Monster claw mark effect on the body */
+body::before {
+  content: '';
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 250px;
+  height: 250px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 100 100"><path d="M20,10 L50,80 M30,10 L60,80 M40,10 L70,80" stroke="%231a9d20" stroke-width="1.5" opacity="0.07" stroke-linecap="round"/></svg>');
+  z-index: -1;
+  transform: rotate(15deg);
+}
+
+/* Add subtle pulsing effect to Monster green elements */
+@keyframes subtle-pulse {
+  0% { opacity: 0.85; }
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+  100% { opacity: 0.85; }
+}
+
+.header h1, .lowest-price {
+  animation: subtle-pulse 3s infinite ease-in-out;
+}
+
+/* Make scrollbar match the theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070707;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+  background: #333;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--monster-green);
+}
