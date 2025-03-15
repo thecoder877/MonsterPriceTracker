@@ -4,10 +4,10 @@ Monster Price Tracker is a Chrome extension that tracks the prices of Monster en
 
 ## Features
 
-- Scrapes prices of Monster energy drinks from a specified website.
-- Displays the prices in a popup with a modern glassmorphism design.
+- Scrapes prices of Monster energy drinks from a specified website (cenoteka).
+- Displays the prices in a popup with a modern design.
 - Allows users to filter which products to display.
-- Automatically scrapes data daily when the browser is first opened.
+- Automatically scrapes data daily when the browser is first opened. (wip)
 
 ## Installation
 
