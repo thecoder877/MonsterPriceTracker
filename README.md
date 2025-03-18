@@ -13,7 +13,7 @@ Monster Price Tracker is a Chrome extension that tracks the prices of Monster en
 
 1. Clone the repository to your local machine:
    ```sh
-   git clone https://github.com/yourusername/monster-price-tracker.git
+   git clone https://github.com/thecoder877/monster-price-tracker.git
    ```
 
 2. Navigate to the project directory:
